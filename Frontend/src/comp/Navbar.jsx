@@ -1,12 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "./modal"
 import Inputform from "./Inputform";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar(){
   const [isOpen, setIsOpen] = useState(false);
+  let token=localStorage.getItem("token");
+  const [isLoggedIn,setIsLoggedIn]=useState(token  ? false : true);
+  useEffect(()=>{
+    setIsLoggedIn(token  ? false : true); 
+  },[token]);
 
   const checkLogin = () => {
-    setIsOpen(true);
+    if(token){
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+    setIsLoggedIn(true);}
+
+    else{
+    setIsOpen(true)}
   };
 
   return (
@@ -14,10 +26,10 @@ export default function Navbar(){
       <header>
         <h2>RasoiBook</h2>
         <ul>
-          <li>Home</li>
-          <li>My Recipe</li>
-          <li>Favourites</li>
-          <li onClick={checkLogin}>Login</li>
+          <li><NavLink to="/">Home</NavLink></li>
+          <li onClick={()=>isLoggedIn && setIsOpen(true)}><NavLink to={!isLoggedIn ?"/myRecipe":"/"}>My Recipe</NavLink></li>
+          <li onClick={()=>isLoggedIn && setIsOpen(true)}><NavLink to={!isLoggedIn ?"/favRecipe":"/"}>Favourites</NavLink></li>
+          <li onClick={checkLogin}><p className="login">{(isLoggedIn)?"Login":"Logout"}</p></li>
         </ul>
       </header>
 

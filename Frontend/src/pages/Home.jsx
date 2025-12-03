@@ -1,19 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Recipeitems from "../comp/Recipeitems";
 
 export const Home = () => {
+  const navigate=useNavigate();
   return (
     <>
       <section className="home">
         <div className="left">
-          <h3>Delicious Recipes</h3>
-          <p>
+          <h1>Delicious Recipes</h1>
+          <h5>
             Discover a world of culinary delights with our collection of
             delicious recipes. From quick and easy meals to gourmet dishes, we
             have something for every taste and occasion. Start cooking today and
             bring joy to your table!
-          </p>
-          <button>Get Started </button>
+          </h5>
+          <button onClick={()=>navigate("/addRecipe")}>Share Your Recipe</button>
         </div>
         <div className="right">
           <img
@@ -24,6 +26,7 @@ export const Home = () => {
           />
         </div>
       </section>
+       
       <div className="bg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
           <path
@@ -36,6 +39,7 @@ export const Home = () => {
       <div className="recipe">
         <Recipeitems />
       </div>
+     
     </>
   );
 };

@@ -7,7 +7,7 @@ import { FaHeart } from "react-icons/fa";
 export default function Recipeitems() {
 
   const allRecipes = useLoaderData();
-  console.log(allRecipes);
+
 
   return (
     <>
